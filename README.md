@@ -8,7 +8,7 @@ Linear light sensor can be made using a photodione and [Transimpedance amplifier
 
 Here I have only the software without all the other stuff (circuitry and mechanic stuff).
 
-Arduino does all the job managing a 24bit ADC and also average the ADC reads for certain amount of time. Interesting feature: there are two command instead of one to start averaging and get the result. This appoach allow the main application do something else while Arduino proces the data. The Pascal side of the code is really small because Arduino does all the work and math.
+Arduino does all the job managing a 24bit ADC and also average the ADC reads for certain amount of time. Interesting feature: there are two command instead of one to start averaging and get the result. This appoach allow the main application to process something else (this way we do not block the main app) while Arduino averaging the data. The Pascal side of the code is really small because Arduino does all the work and math.
 
 The software has been tested for errors, stability and speed.
 
