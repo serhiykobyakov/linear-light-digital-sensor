@@ -4,7 +4,7 @@
 
 ## What is it
 
-Linear light sensor can be made using a photodione and [Transimpedance amplifier](https://en.wikipedia.org/wiki/Transimpedance_amplifier). To get a digital output we need an ADC and a microcontroller to communicate with PC (Arduino for example).
+Linear light sensor can be made using a photodione and [transimpedance amplifier](https://en.wikipedia.org/wiki/Transimpedance_amplifier). To get a digital output we need an ADC and a microcontroller to communicate with PC (Arduino for example).
 
 Here I have only the software without all the other stuff (circuitry and mechanic stuff).
 
