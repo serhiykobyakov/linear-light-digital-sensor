@@ -1,5 +1,11 @@
 unit Photodiode;
+{
+Linear light sensor with digital output
+Photodiode unit
+Version 11.09.2022
 
+(c) Serhiy Kobyakov
+}
 
 
 interface
@@ -75,22 +81,25 @@ constructor Photodiode_device.Init(_ComPort: string);
 var
   MyForm: TForm;
   MyLabel: TLabel;
-  AppIni: TIniFile;
-  UpperInitStr, iniFile: string;
+//  AppIni: TIniFile;
+//  iniFile: string;
+  UpperInitStr: string;
 begin
 // -----------------------------------------------------------------------------
 // the device ID string with which it responds to '?'
   theDeviceID := 'Photodiode';
 // -----------------------------------------------------------------------------
-
+{
   iniFile := Application.Location + theDeviceID + '.ini';
   If not FileExists(iniFile) then
     begin
       showmessage('File ' + LineEnding + iniFile + LineEnding +
-                  'has not been found!' + LineEnding + LineEnding +
-                  'Please fix it');
+          'procedure ''' + {$I %CURRENTROUTINE%} + ''' failed!' + LineEnding +
+          'File ' + iniFile + 'has not been found!' + LineEnding +
+          'Please fix it');
       halt(0);
     end;
+  }
 
 // make a splash screen
 // which shows initialization process
@@ -115,39 +124,18 @@ begin
 
 // -----------------------------------------------------------------------------
 // Read the device variables from ini file:
-  AppIni := TInifile.Create(iniFile);
-  theComPortSpeed := AppIni.ReadInteger(theDeviceID, 'ComPortSpeed', 115200);
+//  AppIni := TInifile.Create(iniFile);
 
-// max time in ms the device may take for its internal initialization
-  theInitTimeout := AppIni.ReadInteger(theDeviceID, 'InitTimeout', 3000);
-
-// max time in ms the device may take before answer
-// it is good idea to measure the longest run
-// before assign the value
-  theLongReadTimeout := AppIni.ReadInteger(theDeviceID, 'LongReadTimeout', 3000);
-
-// max time in ms the device may take before answer
-// in the case of simple and fast queries
-  theReadTimeout := AppIni.ReadInteger(theDeviceID, 'ReadTimeout', 1000);
-
-// other device-specific paremeters must be found in the ini-file
-// and we read them here:
+// device-specific paremeters:
 
 
-  AppIni.Free;
+ // AppIni.Free;
 // -----------------------------------------------------------------------------
 
 // Use basic device initialization
   MyLabel.Caption:= UpperInitStr + 'Connecting to ' + _ComPort + '...';
   sleepFor(200); // refresh the Label to see the change
   Inherited Init(_ComPort);
-
-// Put here the commands which have to be executed right after
-// we connect to the device:
-// Set the shutter into the start position as a last step of initialization
-//  MyLabel.Caption:= UpperInitStr + 'Going to starting position...';
-//  sleepFor(50); // small delay to refresh the Label
-//  SendAndGetAnswer('i');
 
   SetGain(1);
 
@@ -188,7 +176,6 @@ var
 begin
   str := InputBox('text to send', 'Please type in what to send', '?');
   showmessage('Got answer: ' + SendAndGetAnswer(str));
-
 end;
 
 

@@ -1,8 +1,9 @@
-//
 // Photodiode + TIA + ADC
-// Version 10.09.2022
+// Version 11.09.2022
 //
 // (C) Serhiy Kobyakov
+
+
 //
 //  |ADS1220 pin label| Pin Function         |Arduino Connection|
 //  |-----------------|:--------------------:|-----------------:|
